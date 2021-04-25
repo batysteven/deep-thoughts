@@ -1,17 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const ThoughtList = ({ thoughts, title }) => {
+  if (!thoughts.length) {
+    return <h3>No Thoughts Yet</h3>;
+  }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
+  return (
+    <div>
+      <h3>{title}</h3>
+      {thoughts &&
+        thoughts.map(thought => (
+          <div key={thought._id} className="card mb-3">
+            <p className="card-header">
+              {thought.username}
+              thought on {thought.createdAt}
+            </p>
+            <div className="card-body">
+              <p>{thought.thoughtText}</p>
+              <p className="mb-0">
+                Reactions: {thought.reactionCount} || Click to{' '}
+                {thought.reactionCount ? 'see' : 'start'} the discussion!
+              </p>
+            </div>
+          </div>
+        ))}
+    </div>
+  );
+};
+
+export default ThoughtList;
