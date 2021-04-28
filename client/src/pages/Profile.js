@@ -7,6 +7,7 @@ import { ADD_FRIEND } from '../utils/mutations';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
+import ThoughtForm from '../components/ThoughtForm';
 
 const Profile = () => {
   const { username: userParam } = useParams();
@@ -70,6 +71,7 @@ const Profile = () => {
           friends={user.friends}
         />
       </div>
+      <div className="mb-3">{!userParam && <ThoughtForm />}</div>
     </div>
   );
 };
